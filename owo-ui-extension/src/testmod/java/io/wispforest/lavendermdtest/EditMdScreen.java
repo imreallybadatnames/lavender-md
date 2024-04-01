@@ -2,11 +2,7 @@ package io.wispforest.lavendermdtest;
 
 import io.wispforest.lavendermd.MarkdownProcessor;
 import io.wispforest.lavendermd.compiler.OwoUICompiler;
-import io.wispforest.lavendermd.feature.BlockStateFeature;
-import io.wispforest.lavendermd.feature.EntityFeature;
-import io.wispforest.lavendermd.feature.ItemStackFeature;
-import io.wispforest.lavendermd.feature.OwoUITemplateFeature;
-import io.wispforest.lavendermd.feature.ImageFeature;
+import io.wispforest.lavendermd.feature.*;
 import io.wispforest.owo.ui.base.BaseUIModelScreen;
 import io.wispforest.owo.ui.component.LabelComponent;
 import io.wispforest.owo.ui.component.TextAreaComponent;
@@ -32,7 +28,8 @@ public class EditMdScreen extends BaseUIModelScreen<FlowLayout> implements Comma
         rootComponent.childById(TextAreaComponent.class, "input").onChanged().subscribe(value -> {
             try {
                 anchor.<FlowLayout>configure(layout -> {
-                    var processor = MarkdownProcessor.richText(0).copyWith(OwoUICompiler::new).copyWith(new ImageFeature(), new BlockStateFeature(), new ItemStackFeature(), new EntityFeature(), new OwoUITemplateFeature());
+                    var processor = MarkdownProcessor.richText(0).copyWith(OwoUICompiler::new)
+                            .copyWith(new ImageFeature(), new BlockStateFeature(), new ItemStackFeature(), new EntityFeature(), new OwoUITemplateFeature(), new KeybindFeature(), new TranslationsFeature());
 
                     layout.clearChildren();
                     layout.child(processor.process(value));
