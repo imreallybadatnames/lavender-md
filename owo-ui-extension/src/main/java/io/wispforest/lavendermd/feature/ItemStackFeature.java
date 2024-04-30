@@ -10,9 +10,14 @@ import io.wispforest.lavendermd.compiler.OwoUICompiler;
 import io.wispforest.owo.ui.component.Components;
 import net.minecraft.command.argument.ItemStringReader;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 
 public class ItemStackFeature implements MarkdownFeature {
+
+    private final RegistryWrapper.WrapperLookup registries;
+    public ItemStackFeature(RegistryWrapper.WrapperLookup registries) {
+        this.registries = registries;
+    }
 
     @Override
     public String name() {
@@ -33,10 +38,10 @@ public class ItemStackFeature implements MarkdownFeature {
             if (itemStackString == null) return false;
 
             try {
-                var result = ItemStringReader.item(Registries.ITEM.getReadOnlyWrapper(), new StringReader(itemStackString));
+                var result = new ItemStringReader(this.registries).consume(new StringReader(itemStackString));
 
                 var stack = result.item().value().getDefaultStack();
-                stack.setNbt(result.nbt());
+                stack.applyComponentsFrom(result.components());
 
                 tokens.add(new ItemStackToken(itemStackString, stack));
                 return true;

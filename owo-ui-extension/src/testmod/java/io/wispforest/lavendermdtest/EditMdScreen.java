@@ -29,7 +29,7 @@ public class EditMdScreen extends BaseUIModelScreen<FlowLayout> implements Comma
             try {
                 anchor.<FlowLayout>configure(layout -> {
                     var processor = MarkdownProcessor.richText(0).copyWith(OwoUICompiler::new)
-                            .copyWith(new ImageFeature(), new BlockStateFeature(), new ItemStackFeature(), new EntityFeature(), new OwoUITemplateFeature(), new KeybindFeature(), new TranslationsFeature());
+                            .copyWith(new ImageFeature(), new BlockStateFeature(), new ItemStackFeature(this.client.world.getRegistryManager()), new EntityFeature(), new OwoUITemplateFeature(), new KeybindFeature(), new TranslationsFeature());
 
                     layout.clearChildren();
                     layout.child(processor.process(value));
