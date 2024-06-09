@@ -41,7 +41,7 @@ public class ItemStackFeature implements MarkdownFeature {
                 var result = new ItemStringReader(this.registries).consume(new StringReader(itemStackString));
 
                 var stack = result.item().value().getDefaultStack();
-                stack.applyComponentsFrom(result.components());
+                stack.applyUnvalidatedChanges(result.components());
 
                 tokens.add(new ItemStackToken(itemStackString, stack));
                 return true;

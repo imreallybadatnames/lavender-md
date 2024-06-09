@@ -78,7 +78,7 @@ public class ImageFeature implements MarkdownFeature {
 
         @Override
         protected void visitStart(MarkdownCompiler<?> compiler) {
-            compiler.visitImage(new Identifier(this.identifier), this.description, this.fit);
+            compiler.visitImage(Identifier.of(this.identifier), this.description, this.fit);
         }
 
         @Override

@@ -48,7 +48,7 @@ public class EntityFeature implements MarkdownFeature {
                     entityString = entityString.substring(0, nbtIndex);
                 }
 
-                var entityType = Registries.ENTITY_TYPE.getOrEmpty(new Identifier(entityString)).orElseThrow();
+                var entityType = Registries.ENTITY_TYPE.getOrEmpty(Identifier.of(entityString)).orElseThrow();
                 tokens.add(new EntityToken(entityString, entityType, nbt));
                 return true;
             } catch (CommandSyntaxException | NoSuchElementException e) {

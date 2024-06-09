@@ -17,7 +17,7 @@ import java.io.StringWriter;
 public class EditMdScreen extends BaseUIModelScreen<FlowLayout> implements CommandOpenedScreen {
 
     public EditMdScreen() {
-        super(FlowLayout.class, new Identifier("lavender-md-test", "edit-md"));
+        super(FlowLayout.class, Identifier.of("lavender-md-test", "edit-md"));
     }
 
     @Override
