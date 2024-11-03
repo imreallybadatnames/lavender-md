@@ -36,7 +36,7 @@ public class BlockStateFeature implements MarkdownFeature {
             try {
                 tokens.add(new BlockStateToken(
                         blockStateString,
-                        BlockArgumentParser.block(Registries.BLOCK.getReadOnlyWrapper(), blockStateString, true)
+                        BlockArgumentParser.block(Registries.BLOCK, blockStateString, true)
                 ));
                 return true;
             } catch (CommandSyntaxException e) {
