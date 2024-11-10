@@ -88,6 +88,8 @@ public class Parser implements MarkdownFeature.NodeRegistrar {
 
     public Node parseUntil(ListNibbler<Token> tokens, Predicate<Token> until, Predicate<Token> skip) {
         var node = this.parseNode(tokens);
+        var sequence = false;
+
         while (tokens.hasElements()) {
             var next = tokens.peek();
 
@@ -98,6 +100,10 @@ public class Parser implements MarkdownFeature.NodeRegistrar {
 
             if (until.test(next)) break;
 
+            if (!sequence) {
+                node = new SequenceNode().addChild(node);
+                sequence = true;
+            }
             node.addChild(this.parseNode(tokens));
         }
 
@@ -136,6 +142,13 @@ public class Parser implements MarkdownFeature.NodeRegistrar {
                 }
             };
         }
+    }
+
+    public static final class SequenceNode extends Node {
+        @Override
+        protected void visitStart(MarkdownCompiler<?> compiler) {}
+        @Override
+        protected void visitEnd(MarkdownCompiler<?> compiler) {}
     }
 
     public static final class TextNode extends Node {

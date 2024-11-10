@@ -6,7 +6,6 @@ import io.wispforest.lavendermd.Parser;
 import io.wispforest.lavendermd.compiler.MarkdownCompiler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -76,7 +75,7 @@ public class KeybindFeature implements MarkdownFeature {
                             Text.translatable(this.binding.getTranslationKey())
                     ))
             ));
-            compiler.visitText(I18n.translate(this.binding.getBoundKeyTranslationKey()));
+            compiler.visitText(this.binding.getBoundKeyLocalizedText().getString());
         }
 
         @Override

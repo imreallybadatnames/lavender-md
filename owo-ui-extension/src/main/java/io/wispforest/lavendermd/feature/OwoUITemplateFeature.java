@@ -133,7 +133,6 @@ public class OwoUITemplateFeature implements MarkdownFeature {
                 while (paramReader.hasNext()) {
                     var paramName = paramReader.consumeUntil('=');
                     var paramValue = paramReader.consumeEscapedString(',', true);
-                    paramReader.skip();
 
                     builtParams.put(paramName, paramValue);
                 }
